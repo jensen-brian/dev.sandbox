@@ -21,36 +21,54 @@ namespace Practice
             if ((nElements > 0) && (kSteps > 0) && (kSteps < nElements))
             {
                 // 1. Build the array and output what it looks like
-                int[] array = new int[nElements];
-                for (int i = 0; i < nElements; i++)
-                {
-                    array[i] = (i+1);
-                }
-                printArray(array);
+                int[] array = BuildArray(nElements);
 
                 // 2. Rotate the array
-                int[] rotatedArray = new int[nElements];
-                for (int i = 0; i < array.Length; i++)
-                {
-                    int indexer = (i + kSteps);
-                    int move = array[i];
-                    if (indexer < nElements)
-                    {
-                        // insert at as long as the new index is not bigger than the array
-                        rotatedArray[indexer] = move;
-                    }
-                    else
-                    {
-                        // modulo gives you the remainder to use as the new index to insert at
-                        rotatedArray[indexer % nElements] = move;
-                    }
-                }
-                printArray(rotatedArray);
+                Rotate(array, kSteps);
             }
             else
             {
                 Console.WriteLine("n and k must be greater than zero AND k must be less than n");
             }
+        }
+
+        public static int[] BuildArray(int nElements)
+        {
+            if (nElements < 1) { throw new ArgumentException("Must be greater than zero.", "nElements"); }
+
+            int[] array = new int[nElements];
+            for (int i = 0; i < nElements; i++)
+            {
+                array[i] = (i + 1);
+            }
+            printArray(array);
+            return array;
+        }
+
+        public static void Rotate(int[] nums, int k)
+        {
+            if (nums == null) { throw new ArgumentNullException("nums"); }
+            if (k >= nums.Length) { throw new ArgumentException(String.Format("k must be less than nums array length. {0} < {1}", k, nums.Length), "k"); }
+
+
+            int nElements = nums.Length;
+            int[] rotatedArray = new int[nElements];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int indexer = (i + k);
+                int move = nums[i];
+                if (indexer < nElements)
+                {
+                    // insert at as long as the new index is not bigger than the array
+                    rotatedArray[indexer] = move;
+                }
+                else
+                {
+                    // modulo gives you the remainder to use as the new index to insert at
+                    rotatedArray[indexer % nElements] = move;
+                }
+            }
+            printArray(rotatedArray);
         }
 
         private static void printArray(int[] array)

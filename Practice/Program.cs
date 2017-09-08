@@ -15,16 +15,21 @@ namespace Practice
                 //ArrayTest.RotateArray(-1, 3);
                 ArrayTest.RotateArray(7, 3);
                 Console.WriteLine();
-                ArrayTest.RotateArray(20, 6);
+                //ArrayTest.RotateArray(20, 6);
 
-                Console.WriteLine();
-                Console.WriteLine("Press any key to exit.");
-                Console.ReadKey();
+                // Missed the example had a method signature to start with
+                // Refactored original method RotateArray
+                int[] nums = ArrayTest.BuildArray(7);
+                ArrayTest.Rotate(nums, 3);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+
+            Console.WriteLine();
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
         }
     }
 }
